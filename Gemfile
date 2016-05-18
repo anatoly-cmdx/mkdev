@@ -32,6 +32,8 @@ gem 'routing-filter'
 gem 'rollbar'
 gem 'newrelic_rpm'
 
+gem 'responders'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'

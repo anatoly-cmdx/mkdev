@@ -8,13 +8,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-require 'nokogiri'
-require 'open-uri'
+default_password = { password: 'password', password_confirmation: 'password' }
+default_user = User.create_with(default_password).find_or_create_by(email: 'default@gmail.com')
 
-doc = Nokogiri::HTML(open('http://www.learnathome.ru/blog/100-beautiful-words'))
+default_block = default_user.blocks.create(title: 'Стартовая колода', user: default_user)
 
-doc.search('//table/tbody/tr').each do |row|
-  original = row.search('td[2]/p')[0].content.downcase
-  translated = row.search('td[1]/p')[0].content.downcase
-  Card.create(original_text: original, translated_text: translated, user_id: 17)
+words_path = "#{Rails.root}/db/seed/words.yml"
+words = YAML.load File.read(words_path) # ['original' => 'translated', ...]
+words.each do |original, translated|
+  default_block.cards.create(original_text: original, translated_text: translated)
 end
