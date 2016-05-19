@@ -4,6 +4,7 @@
 
 class SuperMemo
   class << self
+    # rubocop:disable Metrics/ParameterLists
     def algorithm(interval, repeat, efactor, attempt, distance, distance_limit)
       quality = set_quality(attempt, distance, distance_limit)
       efactor = set_efactor(efactor, quality)
@@ -14,6 +15,7 @@ class SuperMemo
                 end
       sm_hash.merge!(quality: quality)
     end
+    # rubocop:enable Metrics/ParameterLists
 
     def set_interval(interval, repeat, efactor)
       interval = case repeat
@@ -25,7 +27,7 @@ class SuperMemo
     end
 
     def set_efactor(efactor, quality)
-      efactor = efactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02))
+      efactor += (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02))
       efactor < 1.3 ? 1.3 : efactor
     end
 

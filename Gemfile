@@ -41,4 +41,5 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'rubocop', require: false
+  gem 'pry'
 end

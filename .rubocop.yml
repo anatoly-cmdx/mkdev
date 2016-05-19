@@ -6,9 +6,9 @@ AllCops:
     - 'db/**/*'
     - 'log/**/*'
     - 'public/**/*'
+    - 'spec/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
-    - 'spec/*_helper.rb'
     - Gemfile
 
 Rails:
@@ -30,8 +30,8 @@ Style/Documentation:
 Performance/RedundantMerge:
   Enabled: false
 
-# Metrics/AbcSize:
-#  Max: 30
+Metrics/AbcSize:
+ Max: 16
 
 # Rubocop warning: 'Use find_each instead of each'
 # But sometimes we need 'scoped order', which is ignored when when using `find_each`

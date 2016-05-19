@@ -12,25 +12,33 @@ class User < ActiveRecord::Base
     config.authentications_class = Authentication
   end
 
-  validates :password, confirmation: true, presence: true,
-            length: { minimum: 3 }
-  validates :password_confirmation, presence: true
-  validates :email, uniqueness: true, presence: true,
-            format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }
-  validates :locale, presence: true,
-            inclusion: { in: I18n.available_locales.map(&:to_s),
-                         message: 'Выберите локаль из выпадающего списка.' }
+  FIELD_FORMAT = {
+    email: /\A[^@]+@[^@]+\Z/
+  }.freeze
 
-  def has_linked_github?
+  validates :password, confirmation: true, presence: true, length: { minimum: 3 }
+  validates :password_confirmation, presence: true
+  validates :email, uniqueness: true, presence: true, format: { with: FIELD_FORMAT[:email] }
+  validates :locale, presence: true,
+                     inclusion: {
+                       in: I18n.available_locales.map(&:to_s),
+                       message: 'Выберите локаль из выпадающего списка.'
+                     }
+
+  def linked_github?
     authentications.where(provider: 'github').present?
   end
 
-  def set_current_block(block)
-    update_attribute(:current_block_id, block.id)
+  def reset_current_block
+    self.current_block_id = nil
   end
 
-  def reset_current_block
-    update_attribute(:current_block_id, nil)
+  def current_cards
+    @current_cards ||= current_block ? current_block.cards : cards
+  end
+
+  def first_pending_or_repeating_card
+    current_cards.pending.first || current_cards.repeating.first
   end
 
   private

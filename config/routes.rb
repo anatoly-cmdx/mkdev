@@ -27,8 +27,9 @@ Rails.application.routes.draw do
       end
     end
 
-    put 'review_card' => 'trainer#review_card'
-    get 'trainer' => 'trainer#index'
+    resource :trainer, only: :show do
+      put 'review_card'
+    end
 
     get 'profile/:id/edit' => 'profile#edit', as: :edit_profile
     put 'profile/:id' => 'profile#update', as: :profile
