@@ -1,0 +1,72 @@
+AllCops:
+  DisplayCopNames: true
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'log/**/*'
+    - 'public/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - 'spec/*_helper.rb'
+    - Gemfile
+
+Rails:
+  Enabled: true
+
+# > Limit lines to 80 characters.
+# How did we get here?
+# Github's code views fit 101 character without horizontal scrolling
+Metrics/LineLength:
+  Max: 101
+
+# Half-screen
+Metrics/MethodLength:
+  Max: 28
+
+Style/Documentation:
+  Enabled: false
+
+Performance/RedundantMerge:
+  Enabled: false
+
+# Metrics/AbcSize:
+#  Max: 30
+
+# Rubocop warning: 'Use find_each instead of each'
+# But sometimes we need 'scoped order', which is ignored when when using `find_each`
+# Rails/FindEach:
+#  Enabled: false
+
+# Metrics/CyclomaticComplexity:
+#  Max: 8
+
+# Metrics/PerceivedComplexity:
+#   Max: 8
+
+# Metrics/ClassLength:
+#  Exclude:
+#    - app/models/pda.rb
+#    - app/models/fda.rb
+#    - app/models/da_due.rb
+
+# Style/Documentation:
+#   Enabled: false
+
+# Style/StringLiterals:
+#   Enabled: false
+
+# Style/Encoding:
+#   Enabled: false
+
+# Style/UnneededPercentQ:
+#   Enabled: false
+
+# RSpec/DescribedClass:
+#   Enabled: false
+
+# Style/Semicolon:
+#   Enabled: false
+
+# RSpec/InstanceVariable:
+#   Enabled: false
