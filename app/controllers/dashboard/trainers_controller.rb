@@ -1,5 +1,3 @@
-require 'pry'
-
 module Dashboard
   class TrainersController < Dashboard::BaseController
     respond_to :html, :js, only: :show
