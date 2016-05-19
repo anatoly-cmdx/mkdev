@@ -1,0 +1,34 @@
+AllCops:
+  DisplayCopNames: true
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'log/**/*'
+    - 'public/**/*'
+    - 'spec/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - Gemfile
+
+Rails:
+  Enabled: true
+
+# > Limit lines to 80 characters.
+# How did we get here?
+# Github's code views fit 101 character without horizontal scrolling
+Metrics/LineLength:
+  Max: 101
+
+# Half-screen
+Metrics/MethodLength:
+  Max: 28
+
+Style/Documentation:
+  Enabled: false
+
+Performance/RedundantMerge:
+  Enabled: false
+
+Metrics/AbcSize:
+ Max: 16

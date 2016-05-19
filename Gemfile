@@ -34,8 +34,12 @@ gem 'newrelic_rpm'
 
 gem 'responders'
 
+gem 'puma'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'rubocop', require: false
+  gem 'pry'
 end

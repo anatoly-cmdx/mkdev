@@ -1,21 +1,15 @@
-class Home::HomeController < Home::BaseController
+module Home
+  class HomeController < Home::BaseController
+    respond_to :html, :js
 
-  def index
-    if params[:id]
-      @card = current_user.cards.find(params[:id])
-    else
-      if current_user.current_block
-        @card = current_user.current_block.cards.pending.first
-        @card ||= current_user.current_block.cards.repeating.first
-      else
-        @card = current_user.cards.pending.first
-        @card ||= current_user.cards.repeating.first
-      end
-    end
+    def index
+      @card = if params[:id]
+                current_user.cards.find(params[:id])
+              else
+                current_user.first_pending_or_repeating_card
+              end
 
-    respond_to do |format|
-      format.html
-      format.js
+      respond_with @card
     end
   end
 end
