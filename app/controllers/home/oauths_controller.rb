@@ -10,29 +10,25 @@ module Home
       provider = auth_params[:provider]
       provider_name = provider.titleize
 
-      @user = login_from(provider)
-      if @user
+      if login_from provider
+        redirect_to trainer_path,
+                    notice: t('log_in_is_successful_provider_notice', provider: provider_name)
+      elsif create_user_from_provider provider
         redirect_to trainer_path,
                     notice: t('log_in_is_successful_provider_notice', provider: provider_name)
       else
-        @user = create_user_from_provider provider
-        if @user
-          redirect_to trainer_path,
-                      notice: t('log_in_is_successful_provider_notice', provider: provider_name)
-        else
-          redirect_to user_sessions_path,
-                      alert: t('log_out_failed_provider_alert', provider: provider_name)
-        end
+        redirect_to user_sessions_path,
+                    alert: t('log_out_failed_provider_alert', provider: provider_name)
       end
     end
 
     private
 
     def create_user_from_provider(provider)
-      @user = create_from(provider)
+      user = create_from(provider)
       reset_session
-      auto_login @user
-      @user
+      auto_login user
+      user
     rescue
       nil
     end
