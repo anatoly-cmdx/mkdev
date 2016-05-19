@@ -34,6 +34,8 @@ gem 'newrelic_rpm'
 
 gem 'responders'
 
+gem 'puma'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
