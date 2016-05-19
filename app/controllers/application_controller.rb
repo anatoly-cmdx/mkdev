@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
              session[:locale] ||
              http_accept_compatible_locale
 
-    session[:locale] = I18n.locale = locale_availale?(locale) ? locale : I18n.default_locale
+    session[:locale] = I18n.locale = locale_available?(locale) ? locale : I18n.default_locale
   end
 
   def default_url_options(options = {})
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     http_accept_language.compatible_language_from(I18n.available_locales)
   end
 
-  def locale_availale?(locale)
+  def locale_available?(locale)
     return unless locale
     I18n.available_locales.include? locale.to_sym
   end
