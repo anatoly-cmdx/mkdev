@@ -1,0 +1,17 @@
+#!/bin/bash
+echo ruby/install
+SCRIPT_DIR=$( cd "$( dirname "$0" )" && pwd )
+
+RUBY_DEFAULT_VERSION=ruby-2.3.0
+RUBY_VERSION=${RUBY_VERSION:?$RUBY_DEFAULT_VERSION}
+
+. "$HOME/.rvm/scripts/rvm"
+rvm install $RUBY_VERSION --quiet-curl --quiet
+
+. "$HOME/.rvm/scripts/rvm"
+rvm use $CURRENT_RUBY
+rvm use $CURRENT_RUBY --default
+
+. "$HOME/.rvm/scripts/rvm"
+rvm @global do gem install bundler
+rvm @global do gem update

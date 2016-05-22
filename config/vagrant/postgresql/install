@@ -1,0 +1,8 @@
+#!/bin/bash
+echo postgresql/install
+
+package_server_dev=`sudo apt-cache search postgresql-server-dev- | grep -v all | grep -oP 'postgresql-server-dev-[^ ]+' | head -n1`
+
+sudo apt-get -q -q --assume-yes install postgresql postgresql-contrib $package_server_dev
+
+sudo -u postgres createuser --createdb vagrant

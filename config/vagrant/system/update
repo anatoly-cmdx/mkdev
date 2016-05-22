@@ -1,0 +1,4 @@
+echo system/update
+sudo apt-get -q --assume-yes update
+sudo apt-get -q --assume-yes upgrade
+sudo apt-get -q --assume-yes dist-upgrade
