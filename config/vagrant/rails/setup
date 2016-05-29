@@ -1,0 +1,5 @@
+#!/bin/bash
+echo rails/setup
+cd $PROJECT_FOLDER
+rake db:create:all
+rake db:migrate

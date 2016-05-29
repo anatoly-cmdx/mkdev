@@ -1,0 +1,24 @@
+#!/bin/bash
+echo postgres/setup
+
+echo postgres/setup/create user vagrant
+sudo -u postgres createuser --createdb vagrant
+
+echo postgres/setup/config
+PG_DEFAULT_VERSION=$(sudo apt-cache search postgresql-server-dev- \
+  | grep -v all \
+  | grep -oP 'postgresql-server-dev-[^ ]+' \
+  | sed 's/postgresql-server-dev-//' \
+  | head -n1
+)
+PG_VERSION=${PG_VERSION:?$PG_DEFAULT_VERSION}
+
+POSTGRES_CONFIG="/etc/postgresql/$PG_VERSION/main/pg_hba.conf"
+
+sudo cp "$PROJECT_FOLDER/config/vagrant/postgresql/pg_hba.conf.default" "$POSTGRES_CONFIG"
+
+sudo chown postgres:postgres "$POSTGRES_CONFIG"
+sudo chmod 600               "$POSTGRES_CONFIG"
+
+echo postgres/setup/restart
+sudo service postgresql restart

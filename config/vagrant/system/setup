@@ -1,0 +1,5 @@
+#!/bin/bash
+subnet=$(ip -4 route get 1 | head -1 | cut -d' ' -f8 | tr -d '\n' | grep --perl-regexp --only-matching '\d+\.\d+\.\d+\.' --max-count 1 | head -1)0/24
+sudo ufw allow from $subnet to any port 3000
+
+echo "cd $PROJECT_FOLDER" >> /home/vagrant/.bashrc
