@@ -1,0 +1,12 @@
+#!/bin/bash
+echo postgresql/install
+
+PG_DEFAULT_VERSION=$(sudo apt-cache search postgresql-server-dev- \
+  | grep -v all \
+  | grep -oP 'postgresql-server-dev-[^ ]+' \
+  | sed 's/postgresql-server-dev-//' \
+  | head -n1
+)
+PG_VERSION=${PG_VERSION:?$PG_DEFAULT_VERSION}
+
+sudo apt-get -q --assume-yes install postgresql postgresql-contrib postgresql-server-dev-$PG_VERSION

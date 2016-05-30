@@ -1,0 +1,4 @@
+#!/bin/bash
+echo rails/bundle
+cd $PROJECT_FOLDER
+bundle install

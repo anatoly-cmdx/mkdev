@@ -1,0 +1,14 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+  user: vagrant
+
+development:
+  <<: *default
+  database: flashcards_development
+
+test:
+  <<: *default
+  database: flashcards_test

@@ -1,0 +1,6 @@
+---
+default:
+  project_name: "flashcards"
+  home_folder: "/home/deployer"
+  ruby_version: "2.3.0"
+  pg_version: "9.3"

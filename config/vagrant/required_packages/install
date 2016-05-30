@@ -1,0 +1,5 @@
+#!/bin/bash
+echo required_packages/install
+SCRIPT_DIR=$( cd "$( dirname "$0" )" && pwd )
+
+sudo apt-get install -q --assume-yes nodejs
